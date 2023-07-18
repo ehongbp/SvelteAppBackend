@@ -17,13 +17,13 @@
 
     const handleDelete =(id)=>{
         pollStore.update(currentPolls=>{
-            return currentPolls.filter(poll=>poll.id!=id);
+            return currentPolls.filter(poll=>poll.id!==id);
         })
     }
     const handleVote = (option, id) => {
         pollStore.update(currentPolls =>{
             let copiedPolls = [...currentPolls];
-            let upvotedPoll = copiedPolls.find((poll)=>poll.id==id);
+            let upvotedPoll = copiedPolls.find((poll)=>poll.id===id);
             if(option ==='a'){
                 upvotedPoll.votesA++;
             }

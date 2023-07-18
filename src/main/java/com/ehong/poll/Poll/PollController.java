@@ -47,9 +47,14 @@ public class PollController {
     @PutMapping(path = "{pollId}")
     public void updatePoll(
             @PathVariable("pollId") Long pollId,
-            @RequestParam(required = false) String pollQuestion,
+            @RequestParam(required = false) String question,
             @RequestParam(required = false) String answerA,
-            @RequestParam(required = false) String answerB) {
-        pollService.updatePoll(pollId,pollQuestion,answerA,answerB);
+            @RequestParam(required = false) String answerB,
+            @RequestParam(required = false) Integer voteA,
+            @RequestParam(required = false) Integer voteB
+
+    ) {
+        pollService.updatePoll(pollId,question,answerA,answerB,voteA,voteB);
     }
+
 }

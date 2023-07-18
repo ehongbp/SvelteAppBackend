@@ -45,19 +45,19 @@ public class PollService {
     }
 
     @Transactional
-    public void updatePoll(Long pollId, String pollQuestion, String answerA, String answerB) {
+    public void updatePoll(Long pollId, String question, String answerA, String answerB, Integer voteA, Integer voteB) {
         Poll poll = pollRepository.findById(pollId)
                 .orElseThrow(() -> new IllegalStateException("Poll ID: " + pollId + " not found."));
 
-        if (pollQuestion!=null&&pollQuestion.length() <= 5) {
+        if (question!=null&&question.length() <= 5) {
                 throw new IllegalStateException("Question is too short.");
             }
-            if (pollQuestion!=null&&!poll.getQuestion().equals(pollQuestion)) {
-                List<Poll> existingPolls = pollRepository.findPollByQuestion(pollQuestion);
+            if (question!=null&&!poll.getQuestion().equals(question)) {
+                List<Poll> existingPolls = pollRepository.findPollByQuestion(question);
                 if (!existingPolls.isEmpty()) {
                     throw new IllegalStateException("Question already taken.");
                 }
-                poll.setQuestion(pollQuestion);
+                poll.setQuestion(question);
             }
 
 
@@ -68,6 +68,8 @@ public class PollService {
         if (answerB != null && !answerB.equals(poll.getAnswerB())&&!Objects.equals(answerB,poll.getAnswerB())) {
             poll.setAnswerB(answerB);
         }
+        if(voteA!=null&&!Objects.equals(poll.getVoteA(), voteA)&&!voteA.equals(poll.getVoteA())) poll.setVoteA(voteA);
+        if(voteB!=null&&!Objects.equals(poll.getVoteB(), voteB)&&!voteB.equals(poll.getVoteB())) poll.setVoteB(voteB);
     }
 
 
@@ -75,4 +77,5 @@ public class PollService {
     public void deleteAll() {
         pollRepository.deleteAll();
     }
+
 }
