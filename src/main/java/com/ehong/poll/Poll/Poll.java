@@ -36,14 +36,30 @@ public class Poll {
         return id;
     }
 
-    public String getquestion() {
+    public String getQuestion() {
         return question;
     }
 
-    public String getanswerA() {
+    public String getAnswerA() {
         return answerA;
     }
     public String getAnswerB() {
         return answerB;
+    }
+
+    public void setQuestion(String question) {
+        this.question=question;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAnswerA(String answerA) {
+        this.answerA = answerA;
+    }
+
+    public void setAnswerB(String answerB) {
+        this.answerB = answerB;
     }
 }

@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/poll")
+@CrossOrigin("http://localhost:5173")
 public class PollController {
 
     public final PollService pollService;
@@ -17,12 +19,37 @@ public class PollController {
     }
 
     @GetMapping
-    public List<Poll> getPolls(){
+    public List<Poll> getPolls() {
         return pollService.getPolls();
+    }
+    //test
+    @GetMapping(path = "{pollId}")
+    public Optional<Poll> getPollById(@PathVariable("pollId") Long pollId) {
+        return pollService.getPoll(pollId);
     }
 
     @PostMapping
-    public void addPoll(@RequestBody Poll poll){
+    public void addPoll(@RequestBody Poll poll) {
         pollService.addNewPoll(poll);
+    }
+
+    @DeleteMapping(path = "{pollId}")
+    public void deletePoll(
+            @PathVariable("pollId") Long pollId) {
+        pollService.deletePoll(pollId);
+    }
+    //just for fun
+    @DeleteMapping(path = "deleteAll")
+    public void deleteAll() {
+        pollService.deleteAll();
+    }
+
+    @PutMapping(path = "{pollId}")
+    public void updatePoll(
+            @PathVariable("pollId") Long pollId,
+            @RequestParam(required = false) String pollQuestion,
+            @RequestParam(required = false) String answerA,
+            @RequestParam(required = false) String answerB) {
+        pollService.updatePoll(pollId,pollQuestion,answerA,answerB);
     }
 }

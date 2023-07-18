@@ -15,7 +15,7 @@ public class PollConfig {
     public CommandLineRunner demo(PollRepository repository) {
         return (args) -> {
             // save a few Polls
-            repository.save(new Poll("Twitter or Thread?", "Twitter","Thread"));
+            repository.save(new Poll("Twitter or Thread?", "Twitter", "Thread"));
             repository.save(new Poll("Do you like little seals?", "yes", "yes"));
             repository.save(new Poll("Pineapple on pizza?", "torturing Italian is my hobby", "excuse me?"));
             repository.save(new Poll("Svelte or React?", "Svelte", "React"));
@@ -29,22 +29,6 @@ public class PollConfig {
             }
             log.info("");
 
-            // fetch an individual Poll by ID
-            Poll poll = repository.findById(1L);
-            log.info("Poll found with findById(1L):");
-            log.info("--------------------------------");
-            log.info(poll.toString());
-            log.info("");
-
-            // fetch Polls by key words
-            log.info("Poll found with findByQuestionContains('seal'):");
-            log.info("--------------------------------------------");
-            repository.findByQuestionContains("seal").forEach(seal -> {
-                log.info(seal.toString());
-            });
-            for (Poll seal : repository.findByQuestionContains("seal")) {
-                log.info(seal.toString());
-            }
         };
     }
 }
