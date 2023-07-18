@@ -1,4 +1,4 @@
-import {pollStore} from "../stores";
+import {pollStore} from "../stores/pollStore.js";
 
 export class Client {
 

@@ -16,6 +16,8 @@ public class Poll {
     private String question;
     private String answerA;
     private String answerB;
+    private Integer voteA;
+    private Integer voteB;
 
     protected Poll() {}
 
@@ -23,13 +25,29 @@ public class Poll {
         this.question = question;
         this.answerA = answerA;
         this.answerB=answerB;
+        this.voteA=0;
+        this.voteB=0;
+    }
+    public void addVoteA() {
+        this.voteA++;
+    }
+    public void addVoteB() {
+        this.voteB++;
+    }
+
+    public Integer getVoteA() {
+        return voteA;
+    }
+
+    public Integer getVoteB() {
+        return voteB;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Poll[id=%d, question='%s', answerA='%s', answerB='%s']",
-                id, question, answerA, answerB);
+                "Poll[id=%d, question='%s', answerA='%s', answerB='%s',voteA='%d'.voteB='%d']",
+                id, question, answerA, answerB,voteA,voteB);
     }
 
     public Long getId() {
@@ -49,6 +67,14 @@ public class Poll {
 
     public void setQuestion(String question) {
         this.question=question;
+    }
+
+    public void setVoteA(Integer voteA) {
+        this.voteA = voteA;
+    }
+
+    public void setVoteB(Integer voteB) {
+        this.voteB = voteB;
     }
 
     public void setId(Long id) {
