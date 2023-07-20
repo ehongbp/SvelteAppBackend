@@ -4,8 +4,8 @@
     import {pollStore} from "../stores/pollStore";
 
     let dispatch = createEventDispatcher();
-    let fields = {question: '', answerA: '', answerB:''};
-    let errors = {question: '', answerA: '', answerB:''};
+    let fields = {question: '', answerA: '', answerB:'',voteA: 0,voteB: 0};
+    let errors = {question: '', answerA: '', answerB:'',voteA: 0,voteB: 0};
     let valid = false;
 
     const submitHandler = () =>{
@@ -31,7 +31,7 @@
         }
         //add new poll
         if(valid){
-            let poll = {...fields, votesA:0,votesB:0, id: Math.random()};
+            let poll = {...fields, voteA:0,voteB:0, id: Math.random()};
             pollStore.update(currentPolls =>{
                 return [poll, ...currentPolls];
             });

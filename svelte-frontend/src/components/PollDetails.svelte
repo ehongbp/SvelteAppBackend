@@ -5,9 +5,9 @@
     import Button from "../shared/Button.svelte";
     import {tweened} from 'svelte/motion';
     //reactive values
-    $: totalVotes = poll.votesA + poll.votesB;
-    $: percentA = Math.floor(100/totalVotes*poll.votesA) || 0;
-    $: percentB = Math.floor(100/totalVotes*poll.votesB) || 0;
+    $: totalVotes = poll.voteA + poll.voteB;
+    $: percentA = Math.floor(100/totalVotes*poll.voteA) || 0;
+    $: percentB = Math.floor(100/totalVotes*poll.voteB) || 0;
 
     const tweenedA = tweened(0);
     const tweenedB = tweened(0);
@@ -25,10 +25,10 @@
             let copiedPolls = [...currentPolls];
             let upvotedPoll = copiedPolls.find((poll)=>poll.id===id);
             if(option ==='a'){
-                upvotedPoll.votesA++;
+                upvotedPoll.voteA++;
             }
             if(option ==='b'){
-                upvotedPoll.votesB++;
+                upvotedPoll.voteB++;
             }
             return copiedPolls;
         })
@@ -42,11 +42,11 @@
         <p>Total votes: {totalVotes}</p>
         <div class="answer" on:click={()=> handleVote('a', poll.id)}>
             <div class="percent percent-a" style="width: {$tweenedA}%"></div>
-            <span>{poll.answerA } ({poll.votesA})</span>
+            <span>{poll.answerA } ({poll.voteA})</span>
         </div>
         <div class="answer" on:click={()=> handleVote('b', poll.id)}>
             <div class="percent percent-b" style="width: {$tweenedB}%"></div>
-            <span>{poll.answerB } ({poll.votesB})</span>
+            <span>{poll.answerB } ({poll.voteB})</span>
         </div>
         <div class="delete">
             <Button flat={true} on:click={()=>handleDelete(poll.id)}>Delete</Button>
